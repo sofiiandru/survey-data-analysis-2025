@@ -24,8 +24,8 @@ CSS = """
 st.markdown(CSS, unsafe_allow_html=True)
 
 # Завантаження даних
-survey_df = pd.read_csv(r"C:\Users\user\Desktop\курсова 2025\survey_data_updated.csv", sep=';')
-impact_df = pd.read_csv(r"C:\Users\user\Desktop\курсова 2025\impact_data_updated.csv")
+survey_df = pd.read_csv("survey_data_updated.csv", sep=';')
+impact_df = pd.read_csv("impact_data_updated.csv")
 
 #Об'єднання даних
 merge_key_col = 'ID'
