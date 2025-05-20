@@ -624,7 +624,7 @@ with tab2:
         fig_stacked_genres = px.bar(top_5_genres_sorted,
                                     x='Жанр',
                                     y=['Позитивний вплив', 'Негативний вплив'],
-                                    title="Топ-5 жанрів (стековано за впливом, спадання)",
+                                    title="Топ-5 жанрів (стековано за впливом)",
                                     color_discrete_sequence=['#2ca02c', '#d62728'],
                                     labels={'value': 'Кількість згадувань', 'variable': 'Тип впливу'})
         fig_stacked_genres.update_layout(plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)', showlegend=True)
