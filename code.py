@@ -250,12 +250,10 @@ with tab1:
         genre_totals = genre_device_counts.groupby('Жанр')['Кількість'].transform('sum')
         genre_device_counts['Відсоток'] = (genre_device_counts['Кількість'] / genre_totals) * 100
         sorted_genres = sorted(genre_device_counts['Жанр'].unique())
-
-        # Обчислення меж осей
-        min_x = -0.5  # Щоб трохи відступити від першого жанру
-        max_x = len(sorted_genres) - 0.5  # Щоб трохи відступити від останнього жанру
+        min_x = -0.5  
+        max_x = len(sorted_genres) - 0.5  
         min_y = 0
-        max_y = genre_device_counts['Відсоток'].max() * 1.1  # Трохи запасу зверху
+        max_y = genre_device_counts['Відсоток'].max() * 1.1  
 
         with col2:
             st.markdown("<div class='card'>", unsafe_allow_html=True)
@@ -274,13 +272,12 @@ with tab1:
                                                     plot_bgcolor='rgba(0,0,0,0)',
                                                     paper_bgcolor='rgba(0,0,0,0)',
                                                     xaxis=dict(showgrid=True, gridcolor='lightgray', 
-                                                            tickvals=sorted_genres,  # Вказуємо конкретні значення для міток
+                                                            tickvals=sorted_genres,  
                                                             range=[min_x, max_x]),
                                                     yaxis=dict(showgrid=True, gridcolor='lightgray', range=[min_y, max_y]),
                                                     margin=dict(l=0, r=0, b=0, t=50) # Коригуємо поля
                                                     )
-            
-            # Додаємо вертикальні лінії від осі X до точок
+        
             for trace in fig_devices_genre_line.data:
                 for x, y in zip(trace.x, trace.y):
                     fig_devices_genre_line.add_shape(
@@ -299,7 +296,6 @@ with tab1:
                         'близько 3 годин': 3, 'близько 4 годин': 4, '4 години і більше': 5}
         filtered_survey_df['Час_число'] = filtered_survey_df['Час'].map(time_mapping)
         
-        # Фільтруємо дані, щоб виключити записи з Жанром "-"
         filtered_genre_df = filtered_survey_df[filtered_survey_df['Жанр'] != '-'].copy()
         
         genre_counts = filtered_genre_df['Жанр'].value_counts().reset_index(name='Кількість гравців')
@@ -311,7 +307,7 @@ with tab1:
             if not avg_time_by_genre.empty:
                 fig_time_genre_bar = px.bar(avg_time_by_genre, x='Жанр', y='Час_число',
                                                 title="Середній час гри за жанром", template='plotly_white',
-                                                color_discrete_sequence=['#1f77b4'] * len(avg_time_by_genre), # Один колір для всіх
+                                                color_discrete_sequence=['#1f77b4'] * len(avg_time_by_genre), 
                                                 labels={'Час_число': 'Середній час гри (години)', 'Жанр': 'Жанр'},
                                                 hover_data={'Жанр': True, 'Час_число': ':.2f',
                                                             'Кількість гравців': True})
@@ -428,7 +424,7 @@ with tab2:
                 div[data-baseweb="select"] > div {
                     border: 1px solid #007bff !important;
                     border-radius: 5px !important;
-                    padding: 0.1rem !important; /* Трохи зменшуємо внутрішній відступ */
+                    padding: 0.1rem !important; 
                 }
                 .st-eb {
                     display: flex;
@@ -438,7 +434,7 @@ with tab2:
                 """,
                 unsafe_allow_html=True,
             )
-            col_label_pos, col_select_pos = st.columns([1, 3]) # Збільшуємо ширину колонки для селектора
+            col_label_pos, col_select_pos = st.columns([1, 3]) 
 
             with col_label_pos:
                 st.markdown('<div style="display: flex; align-items: center; height: 2.5rem;">Категорія:</div>', unsafe_allow_html=True)
@@ -479,7 +475,7 @@ with tab2:
                 div[data-baseweb="select"] > div {
                     border: 1px solid #dc3545 !important;
                     border-radius: 5px !important;
-                    padding: 0.1rem !important; /* Трохи зменшуємо внутрішній відступ */
+                    padding: 0.1rem !important; 
                 }
                 .st-eb {
                     display: flex;
@@ -535,7 +531,7 @@ with tab2:
         st.markdown('<div class="card">', unsafe_allow_html=True)
         if 'Жанр позитивного впливу' in filtered_merged_df.columns:
             positive_genre_data = filtered_merged_df.dropna(subset=['Жанр позитивного впливу'])
-            positive_genre_data_filtered = positive_genre_data[positive_genre_data['Жанр позитивного впливу'] != 'Всі'] # Виключаємо 'Всі' (з великої літери)
+            positive_genre_data_filtered = positive_genre_data[positive_genre_data['Жанр позитивного впливу'] != 'Всі']
 
             if selected_genre_category2 == 'Всі категорії':
                 genre_positive_counts = positive_genre_data_filtered['Жанр позитивного впливу'].value_counts().nlargest(5).reset_index(name='Кількість')
