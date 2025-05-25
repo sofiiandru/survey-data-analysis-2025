@@ -378,10 +378,6 @@ with tab2:
         filtered_merged_df['Категорія позитивного впливу'] = filtered_merged_df['Категорія позитивного впливу'].str.strip()
         filtered_merged_df['Категорія негативного впливу'] = filtered_merged_df['Категорія негативного впливу'].str.strip()
 
-        # Перейменовуємо категорію перед обчисленням
-        filtered_merged_df['Категорія позитивного впливу'] = filtered_merged_df['Категорія позитивного впливу'].replace('Когнітивні функції здібності', 'Когнітивні функції')
-        filtered_merged_df['Категорія негативного впливу'] = filtered_merged_df['Категорія негативного впливу'].replace('Когнітивні функції здібності', 'Когнітивні функції')
-
         positive_impact_categories = filtered_merged_df['Категорія позитивного впливу'].value_counts().reset_index(name='Кількість')
         positive_impact_categories.columns = ['Категорія', 'Позитивний вплив']
         negative_impact_categories = filtered_merged_df['Категорія негативного впливу'].value_counts().reset_index(name='Кількість')
