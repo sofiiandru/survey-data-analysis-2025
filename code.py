@@ -47,7 +47,6 @@ if 'Вік' in survey_df.columns:
     age_label_map = {age: f"{age} р." for age in cleaned_ages_sorted}
     age_labels = [age_label_map[age] for age in cleaned_ages_sorted]
 
-    # Перемикач "Обрати всі"
     select_all_ages = st.sidebar.checkbox("Обрати всі віки", value=True)
 
     selected_labels = st.sidebar.multiselect(
@@ -56,12 +55,10 @@ if 'Вік' in survey_df.columns:
         default=age_labels if select_all_ages else []
     )
 
-    # Витяг чисел
     age_filter = [age for age, label in age_label_map.items() if label in selected_labels]
 else:
     st.sidebar.warning("Стовпець 'Вік' не знайдено у survey_df. Фільтрація за віком недоступна.")
     age_filter = None
-# Фільтрація
 if age_filter is not None and 'Вік_cleaned' in survey_df.columns:
     filtered_survey_df = survey_df[survey_df['Вік_cleaned'].isin(age_filter)].copy()
     filtered_merged_df = merged_df[merged_df[merge_key_col].isin(filtered_survey_df[merge_key_col])].copy()
